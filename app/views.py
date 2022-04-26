@@ -12,23 +12,36 @@ def home(request):
     return render(request, 'app/home.html', context)
 
 
-def add_note(Request):
-    if Request.method == 'POST':
+def add_note(request):
+    if request.method == 'POST':
         title = Request.POST['title']
         note = Request.POST['message']
         p = notes(title= title, note= note)
         p.save()   
         return redirect('home')
     
-    return render(Request, 'app/add.html')
+    return render(request, 'app/add.html')
 
 
-def detail_nots(Request, pk):
+def detail_nots(request, pk):
+    if request.method == 'POST':
+        obj = notes.objects.get(id=pk)
+        obj.title= request.POST['title']
+        obj.note= request.POST['message']
+        obj.save()
+        return redirect('home')
+        
     context = {
-        'edit': get_list_or_404(notes, id=pk),
+        'notes': get_list_or_404(notes, id=pk),
     }
-    return render(Request, 'app/edit.html', context)
+    return render(request, 'app/detail.html', context)
 
-
-
-
+def delete_note(request, pk):
+    if request.method == 'POST':
+        obj = notes.objects.get(id=pk)
+        obj.delete()
+        return redirect('home')
+    context = {
+        'delete': get_list_or_404(notes, id=pk),
+    }
+    return render(request, 'app/delete.html', context)

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete {% endblock %}
+
+
+{% block style %}
+<style>
+  main{
+    justify-content: center;
+        align-items: center;
+        display: flex;
+  }
+
+    .parent {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        border-radius: 10px
+      }
+      .div_box {
+        width: 100%;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        border-radius: 10px
+      }
+      
+      .card {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+      }
+
+</style>
+{% endblock %}
+
+
+
+
+{% block contex %}
+    <ul class="nav nav-pills p-3 bg-white mb-3 rounded-pill align-items-center" style="margin-right: 40px; margin-left: 40px; margin-top: 20px;">
+        <li class="nav-item">
+            <a href="{% url 'home' %}" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2" id="all-category">
+                <i class="icon-layers mr-1"></i><span class="d-none d-md-block">All Notes</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'add' %}" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2" id="all-category">
+                <i class="icon-layers mr-1"></i><span class="d-none d-md-block">Add note</span>
+            </a>
+        </li>
+        
+      </ul>
+
+      <main>
+        {% for obj in delete %}
+        
+            <div style=" width: 400px; height: 250px; justify-content: center; align-items: center; background-color: white;">
+                <div class="note-title form-group col-md-12" style="justify-content: center; align-items: center;">
+                    <br>
+                    <h5 class="card-title">delete </h5>
+                    <hr>
+                    <p class="card-text" >Are you sure of delete this item?</p>
+                </div>
+
+                <br>
+                <br>
+                {% for obj in delete %}
+                {% csrf_token %}
+                
+                <form action="" method="post">
+                <div style="direction: rtl;">
+                    <button class="btn btn-danger btn-lg active float-right" style="margin: 10px;" role="button" aria-pressed="true">Delete</button>
+                </div>
+                <a href="{% url 'detail' obj.id %}" class="btn btn-secondary btn-lg active float-right" style="margin: 10px;" role="button" aria-pressed="true">Cancle</a>
+                {% endfor %}
+                </form>
+                
+            </div>
+    {% endfor %}
+    </main>
+    {% endblock %}

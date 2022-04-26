@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %} Details {% endblock %}
+
+{% block style %}
+
+<style>
+  main{
+    justify-content: center;
+        align-items: center;
+        display: flex;
+  }
+
+    .parent {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        border-radius: 10px
+      }
+      .div_box {
+        width: 100%;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        border-radius: 10px
+      }
+      
+      .card {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+      }
+
+</style>
+{% endblock %}
+
+{% block contex %}
+    <ul class="nav nav-pills p-3 bg-white mb-3 rounded-pill align-items-center" style="margin-right: 40px; margin-left: 40px; margin-top: 20px;">
+        <li class="nav-item">
+            <a href="{% url 'home' %}" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2" id="all-category">
+                <i class="icon-layers mr-1"></i><span class="d-none d-md-block">All Notes</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'add' %}" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2 active" id="all-category">
+                <i class="icon-layers mr-1"></i><span class="d-none d-md-block">Add note</span>
+            </a>
+        </li>
+        
+      </ul>
+<main>
+    {% for obj in notes %}
+    <form action="" method="post">
+    {% csrf_token %}
+    <div class="modal-header bg-info text-white">
+        <h5 class="modal-title text-white">Add Notes</h5>
+      </div>
+        <div style=" width: 700px; height: 450px; justify-content: center; align-items: center; background-color: white;">
+            <div class="note-title form-group col-md-12" style="justify-content: center; align-items: center;">
+                <br>
+                <label>Note Title</label>
+                <input type="text" id="note-has-title" name="title" class="form-control" value="{{ obj.title }}" placeholder="Title" />
+            </div>
+           
+        
+            <div class="note-description form-group col-md-12" style="justify-content: center; align-items: center;">
+              <label>Note Description</label>
+              <textarea id="note-has-description" class="form-control" name="message" cols="6" placeholder="Description" rows="7">{{ obj.note }}</textarea>
+            </div>
+        
+            <div style="direction: rtl;">
+                <button class="btn btn-primary btn-lg active float-right" style="margin: 10px;" role="button" aria-pressed="true">Edit</button>
+            </div>
+            
+            </form>
+                <a href="{% url 'delete' obj.id %}" class="btn btn-danger btn-lg active float-right" style="margin: 10px;" role="button" aria-pressed="true">Delete</a>
+            
+        </div>
+{% endfor %}
+</main>
+{% endblock %}

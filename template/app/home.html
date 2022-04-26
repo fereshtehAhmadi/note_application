@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} test {% endblock %}
+{% block title %} Home {% endblock %}
 
 {% block style %}
 <style>
@@ -64,7 +64,7 @@
                     <h5>{{ obj.title }}</h5>
                 <p style="color: gray;">11 March 2009</p>
                 <p style="color: rgb(75, 75, 75); font-size: 18px">{{ obj.note }}</p>
-                <a href="" class="float-right" style="margin: 10px;">see more</a>
+                <a href="{% url 'detail' obj.id %}" class="float-right" style="margin: 10px;">see more</a>
                 </div>
             </div>
             
