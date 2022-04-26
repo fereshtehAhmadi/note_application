@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block contex %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">home</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">view order</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">order by id</a>
+        <a class="dropdown-item" href="#">order by name</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">add</a>
+    </li>
+  </ul>
+
+
+<!-- <div id="card">
+    {% for obj in notes %}
+    <div id="notes1">
+      <div id="notes2">
+        <div id="notes3">
+        <br>
+        <div>
+          <a href="{% url 'edit_note' obj.id %}">
+            <button>category</button>
+          </a>
+        </div>
+        <div>
+        <h2>title: </h2>
+        {{ obj.title }}
+    </div>
+    <div>
+        <h2>massage: </h2>
+        {{ obj.note }}
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+</div>
+</div> -->
+
+{% endblock %}

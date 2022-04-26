@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def home(Request):
+    context = {
+        'notes': notes.objects.all(),
+    }
+    return render(Request, 'app/index.html', context)
+
