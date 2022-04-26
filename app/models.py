@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+
+class notes(models.Model):
+    title = models.CharField(max_length=100)
+    note = models.CharField(max_length=40000)
+    date = models.DateTimeField(auto_now_add=True)
+    
