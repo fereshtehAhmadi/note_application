@@ -1,0 +1,3 @@
+# note_application
+#### This code helps you save your important daily events.
+#### And if necessary, view, edit or delete previous notes ...
