@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from app.models import Notes
+from app.models import Notes, Categorie
 import datetime
 from django.shortcuts import get_list_or_404
 
@@ -16,8 +16,12 @@ def add_note(request):
     if request.method == 'POST':
         title = request.POST['title']
         note = request.POST['message']
-        p = Notes(title= title, note= note)
-        p.save()   
+        category = request.POST['category']
+        c = Categorie(category= category)
+        c.save()
+        obj = Categorie.objects.get(category= category)
+        n = Notes(title= title, note= note, category= obj)
+        n.save()   
         return redirect('home')
     
     return render(request, 'app/add.html')

@@ -59,21 +59,25 @@
   <div class="modal-header bg-info text-white">
     <h5 class="modal-title text-white">Add Notes</h5>
   </div>
- <div style=" width: 700px; height: 450px; justify-content: center; align-items: center; background-color: white;">
+ <div style=" width: 700px; height: 500px; justify-content: center; align-items: center; background-color: white;">
       <div class="note-title form-group col-md-12" style="justify-content: center; align-items: center;">
         <br>
         <label>Note Title</label>
         <input type="text" id="note-has-title" name="title" class="form-control" placeholder="Title" />
       </div>
    
-
         <div class="note-description form-group col-md-12" style="justify-content: center; align-items: center;">
           <label>Note Description</label>
           <textarea id="note-has-description" class="form-control" name="message" cols="6" placeholder="Description" rows="7"></textarea>
         </div>
 
-        <div style="direction: rtl;">
-          <button type="submit" class="btn btn-primary float-right" style="margin: 10px;">Add</button>
+      <div class="note-title form-group col-md-12" style="justify-content: center; align-items: center;">
+        <label>Category</label>
+        <input type="text" id="note-has-title" name="category" class="form-control col-md-6" placeholder="Category" />
+      </div>
+
+      <div style="direction: rtl;">
+        <button type="submit" class="btn btn-primary float-right" style="margin: 10px;">Add</button>
       </div>
 </div>
 </form>

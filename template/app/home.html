@@ -54,13 +54,11 @@
             <select class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <option value="">order by date</option>
                 <option value="">order by name</option>
+            </select>
         </li>
             
         
       </ul>
-    
-
-
     <section class="parent container">   
         <div class="div_box row">
             {% for obj in notes %}
@@ -73,7 +71,6 @@
                 <a href="{% url 'detail' obj.id %}" class="float-right" style="margin: 10px;">see more</a>
                 </div>
             </div>
-            
             {% endfor %}       
         </div>
     

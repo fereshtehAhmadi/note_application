@@ -73,11 +73,12 @@
                 
                 <form action="" method="post">
                 <div style="direction: rtl;">
-                    <button class="btn btn-danger btn-lg active float-right" style="margin: 10px;" role="button" aria-pressed="true">Delete</button>
+                    <a herf="{% url 'home' obj.id %}" class="btn btn-danger btn-lg active float-right" style="margin: 10px;" role="button" aria-pressed="true">Delete</button>
                 </div>
+              </form>
                 <a href="{% url 'detail' obj.id %}" class="btn btn-secondary btn-lg active float-right" style="margin: 10px;" role="button" aria-pressed="true">Cancle</a>
                 {% endfor %}
-                </form>
+                
                 
             </div>
     {% endfor %}
