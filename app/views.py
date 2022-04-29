@@ -12,6 +12,14 @@ def home(request):
     return render(request, 'app/home.html', context)
 
 
+def category(request, cats):
+    obj = Categorie.objects.get(category= cats)
+    context = {
+        'notes': get_list_or_404(Notes, category= obj.id),
+    }
+    return render(request, 'app/home.html', context)
+
+
 def add_note(request):
     if request.method == 'POST':
         title = request.POST['title']

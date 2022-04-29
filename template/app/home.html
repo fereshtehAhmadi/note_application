@@ -22,8 +22,7 @@
       
       .card {
         width: 100%;
-        height: 200px;
-        direction: ltr;
+        height: 210px;
         background-color: white;
         display: flex;
         flex-direction: column;
@@ -64,12 +63,14 @@
             {% for obj in notes %}
             
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1">
-                <div class="card card-body">
-                    <h5>{{ obj.title }}</h5>
-                <p style="color: gray;">11 March 2009</p>
+            <div class="card card-body">
+
+                <h5>{{ obj.title }}</h5>
+                <a href="{% url 'category' obj.category %}" class="btn btn-light btn-sm" style="width: 60px;" name="category">{{ obj.category }}</a>
+                <p style="color: gray;">{{ obj.update }}</p>
                 <p style="color: rgb(75, 75, 75); font-size: 18px">{{ obj.note }}</p>
-                <a href="{% url 'detail' obj.id %}" class="float-right" style="margin: 10px;">see more</a>
-                </div>
+                <a href="{% url 'detail' obj.id %}" class="btn btn-link float-right" style="margin: 10px;">see more</a>
+            </div>
             </div>
             {% endfor %}       
         </div>
