@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from app.models import Notes, Categorie
 import datetime
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404
 
 
 
@@ -32,21 +32,30 @@ def add_note(request):
         n.save()   
         return redirect('home')
     
-    return render(request, 'app/add.html')
+    return render(request, 'app/add_edit.html')
 
 
-def detail_nots(request, pk):
+def edit_note(request, pk):
     if request.method == 'POST':
         obj = Notes.objects.get(id=pk)
         obj.title= request.POST['title']
         obj.note= request.POST['message']
-        obj.save()
-        return redirect('home')
-        
+        n = Notes(title= title, note= note)
+        n.save()   
+        return redirect('home')   
+    
+    context = {
+        'notes': get_object_or_404(Notes, id=pk),
+    }
+    return render(request, 'app/add_edit.html', context)
+
+
+def detail_nots(request, pk):   
     context = {
         'notes': get_list_or_404(Notes, id=pk),
     }
     return render(request, 'app/detail.html', context)
+
 
 def delete_note(request, pk):
     if request.method == 'POST':
