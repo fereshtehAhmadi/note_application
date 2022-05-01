@@ -4,7 +4,48 @@
 
 {% block style %}
 <style>
+    .dropbtn {
+        background-color: white;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;   
+        cursor: pointer;
+    }
      
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+     
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        min-width: 250px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+     
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+     
+    .dropdown-content a:hover {background-color: #f1f1f1}
+     
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+     
+    .dropdown:hover .dropbtn {
+        background-color: white;
+    }
+    a{
+        text-decoration: none;
+    }
       .parent {
         justify-content: center;
         align-items: center;
@@ -50,10 +91,15 @@
             </a>
         </li>
         <li class="nav-item">
-            <select class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <option value="">order by date</option>
-                <option value="">order by name</option>
-            </select>
+            <div class="dropdown dropdown-toggle" style="float:right;">
+                <button class="dropbtn" id="menu" style="color: rgba(8, 85, 199, 0.881);">order list</button>
+                <div class="dropdown-content dropdown-menu">
+                
+                <a href="{% url 'date' %}">order by date</a>
+                <a href="{% url 'name' %}">order by name</a>
+                
+              </div>
+              </div>
         </li>
             
         
@@ -69,7 +115,7 @@
                 <a href="{% url 'category' obj.category %}" class="btn btn-light btn-sm" style="width: 60px;" name="category">{{ obj.category }}</a>
                 <p style="color: gray;">{{ obj.update }}</p>
                 <p style="color: rgb(75, 75, 75); font-size: 18px">{{ obj.note }}</p>
-                <a href="{% url 'detail' obj.id %}" class="btn btn-link float-right" style="margin: 10px;">see more</a>
+                <a href="{% url 'detail' obj.id %}" class="float-right" style="margin: 10px;">see more</a>
             </div>
             </div>
             {% endfor %}       

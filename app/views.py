@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from app.models import Notes, Categorie
-import datetime
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 
@@ -8,6 +7,22 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 def home(request):
     context = {
         'notes': Notes.objects.all(),
+    }
+    return render(request, 'app/home.html', context)
+
+
+def order_by_date(request):
+    context = {
+        'notes': Notes.objects.all().order_by('update'),
+    }
+    return render(request, 'app/home.html', context)
+
+
+
+
+def order_by_name(request):
+    context = {
+        'notes': Notes.list.order_by('title')
     }
     return render(request, 'app/home.html', context)
 
@@ -25,8 +40,9 @@ def add_note(request):
         title = request.POST['title']
         note = request.POST['message']
         category = request.POST['category']
-        c = Categorie(category= category)
-        c.save()
+        if Categorie.objects.filter(category=category).exists() == False:
+            c = Categorie(category= category)
+            c.save()
         obj = Categorie.objects.get(category= category)
         n = Notes(title= title, note= note, category= obj)
         n.save()   
@@ -40,8 +56,13 @@ def edit_note(request, pk):
         obj = Notes.objects.get(id=pk)
         obj.title= request.POST['title']
         obj.note= request.POST['message']
-        n = Notes(title= title, note= note)
-        n.save()   
+        category = request.POST['category']
+        if Categorie.objects.filter(category=category).exists() == False:
+            c = Categorie(category= category)
+            c.save()
+        cat = Categorie.objects.get(category= category)
+        obj.category = cat
+        obj.save()   
         return redirect('home')   
     
     context = {
