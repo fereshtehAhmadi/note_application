@@ -95,8 +95,8 @@
                 <button class="dropbtn" id="menu" style="color: rgba(8, 85, 199, 0.881);">order list</button>
                 <div class="dropdown-content dropdown-menu">
                 
-                <a href="{% url 'date' %}">order by date</a>
-                <a href="{% url 'name' %}">order by name</a>
+                <a href="{% url 'home_with_order' 'title' %}">order by name</a>
+                <a href="{% url 'home_with_order' 'creat' %}">order by date</a>    
                 
               </div>
               </div>
@@ -107,7 +107,6 @@
     <section class="parent container">   
         <div class="div_box row">
             {% for obj in notes %}
-            
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 p-1">
             <div class="card card-body">
 
@@ -116,6 +115,7 @@
                 <p style="color: gray;">{{ obj.update }}</p>
                 <p style="color: rgb(75, 75, 75); font-size: 18px">{{ obj.note }}</p>
                 <a href="{% url 'detail' obj.id %}" class="float-right" style="margin: 10px;">see more</a>
+           
             </div>
             </div>
             {% endfor %}       

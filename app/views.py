@@ -4,26 +4,17 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 
 
 
-def home(request):
-    context = {
-        'notes': Notes.objects.all(),
-    }
-    return render(request, 'app/home.html', context)
-
-
-def order_by_date(request):
-    context = {
-        'notes': Notes.objects.all().order_by('update'),
-    }
-    return render(request, 'app/home.html', context)
-
-
-
-
-def order_by_name(request):
-    context = {
-        'notes': Notes.list.order_by('title')
-    }
+def home(request, order=None):
+    if order :
+        context = {
+            'notes': Notes.objects.order_by(order),
+        }
+        
+    else:
+        context = {
+            'notes': Notes.objects.all(),
+        }
+        
     return render(request, 'app/home.html', context)
 
 
@@ -79,11 +70,14 @@ def detail_nots(request, pk):
 
 
 def delete_note(request, pk):
+    obj = get_object_or_404(Notes, id=pk)
+    
     if request.method == 'POST':
-        obj = Notes.objects.get(id=pk)
+        # id = request.POST['id']
         obj.delete()
         return redirect('home')
+    
     context = {
-        'delete': get_list_or_404(Notes, id=pk),
+        'delete': obj,
     }
     return render(request, 'app/delete.html', context)
