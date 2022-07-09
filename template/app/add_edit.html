@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{% if notes %}
+{% if note %}
 Edit
 {% else %}
-Add notes 
+Add note 
 {% endif %}
 {% endblock %}
 
@@ -49,16 +49,6 @@ Add notes
                 <i class="icon-layers mr-1"></i><span class="d-none d-md-block">All note</span>
             </a>
         </li>
-      {% if notes %}
-      {% else %}
-
-        <li class="nav-item">
-          <a href="" class="nav-link rounded-pill note-link d-flex align-items-center px-2 px-md-3 mr-0 mr-md-2 active" id="all-category">
-            <i class="icon-layers mr-1"></i><span class="d-none d-md-block">Add note</span>
-          </a>
-        </li>
-        
-      {% endif %}
       </ul>
 
 <main>
@@ -66,30 +56,30 @@ Add notes
 <form action="" method="post">
   {% csrf_token %}
   <div class="modal-header bg-info text-white">
-    <h5 class="modal-title text-white">{% if notes %} Edit {% else %} Add Notes {% endif %}</h5>
+    <h5 class="modal-title text-white">{% if note %} Edit {% else %} Add note {% endif %}</h5>
   </div>
  <div style=" width: 700px; height: 500px; justify-content: center; align-items: center; background-color: white;">
       <div class="note-title form-group col-md-12" style="justify-content: center; align-items: center;">
         <br>
         <label>Note Title</label>
-        <input type="text" id="note-has-title" name="title" class="form-control" placeholder="Title" {% if notes %} value="{{ notes.title }}" {% endif %}/>
+        <input type="text" id="note-has-title" name="title" class="form-control" placeholder="Title" {% if note %} value="{{ note.title }}" {% endif %}/>
       </div>
    
         <div class="note-description form-group col-md-12" style="justify-content: center; align-items: center;">
           <label>Note Description</label>
-          <textarea id="note-has-description" class="form-control" name="message" cols="6" placeholder="Description" rows="7">{% if notes %} {{ notes.note}} {% endif %}</textarea>
+          <textarea id="note-has-description" class="form-control" name="message" cols="6" placeholder="Description" rows="7">{% if note %} {{ note.note}} {% endif %}</textarea>
         </div>
 
       <div class="note-title form-group col-md-12" style="justify-content: center; align-items: center;">
         <label>Category</label>
-        <input type="text" id="note-has-title" name="category" class="form-control col-md-6" {% if notes %} value="{{ notes.category }}" {% endif %} placeholder="Category" />
+        <input type="text" id="note-has-title" name="category" class="form-control col-md-6" {% if note %} value="{{ note.category }}" {% endif %} placeholder="Category" />
       </div>
 
       <div style="direction: rtl;">
-        {% if notes %} 
+        {% if note %} 
         <button type="submit" class="btn btn-primary float-right" style="margin: 10px;">Update</button>
         {% else %}
-        <button type="submit" class="btn btn-primary float-right" style="margin: 10px;">Add</button>
+        <a href="{% url 'add' %}" type="submit" class="btn btn-primary float-right" style="margin: 10px;">Add</a>
         {% endif %}
         
       </div>

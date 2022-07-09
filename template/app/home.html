@@ -113,7 +113,7 @@
                 <h5>{{ obj.title }}</h5>
                 <a href="{% url 'category' obj.category %}" class="btn btn-light btn-sm" style="width: 60px;" name="category">{{ obj.category }}</a>
                 <p style="color: gray;">{{ obj.update }}</p>
-                <p style="color: rgb(75, 75, 75); font-size: 18px">{{ obj.note }}</p>
+                <p style="color: rgb(75, 75, 75); font-size: 18px">{{ obj.note|truncatewords:4 }}</p>
                 <a href="{% url 'detail' obj.id %}" class="float-right" style="margin: 10px;">see more</a>
            
             </div>

@@ -5,16 +5,14 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 
 
 def home(request, order=None):
-    if order :
+    if order:
         context = {
             'notes': Notes.objects.order_by(order),
-        }
-        
+        }    
     else:
         context = {
             'notes': Notes.objects.all(),
         }
-        
     return render(request, 'app/home.html', context)
 
 
@@ -32,11 +30,9 @@ def add_note(request):
         note = request.POST['message']
         category = request.POST['category']
         if Categorie.objects.filter(category=category).exists() == False:
-            c = Categorie(category= category)
-            c.save()
+            Categorie.objects.create(category= category)
         obj = Categorie.objects.get(category= category)
-        n = Notes(title= title, note= note, category= obj)
-        n.save()   
+        Notes.objects.create(title= title, note= note, category= obj)
         return redirect('home')
     
     return render(request, 'app/add_edit.html')
@@ -64,7 +60,7 @@ def edit_note(request, pk):
 
 def detail_nots(request, pk):   
     context = {
-        'notes': get_list_or_404(Notes, id=pk),
+        'note': get_list_or_404(Notes, id=pk),
     }
     return render(request, 'app/detail.html', context)
 
